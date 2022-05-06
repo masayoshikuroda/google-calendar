@@ -7,8 +7,9 @@ from google.auth import load_credentials_from_file
 
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 CAL_ID = sys.argv[1]
+PWD = os.path.dirname(__file__)
 
-creds = load_credentials_from_file('credentials.json', SCOPES)[0]
+creds = load_credentials_from_file(PWD + '/credentials.json', SCOPES)[0]
 service = build('calendar', 'v3', credentials=creds)
 
 tz = datetime.timezone(datetime.timedelta(hours=9))
