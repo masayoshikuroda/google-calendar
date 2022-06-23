@@ -6,9 +6,16 @@ from googleapiclient.discovery import build
 from google.auth import load_credentials_from_file
 
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
-CAL_ID = sys.argv[1]
 PWD = os.path.dirname(__file__)
 
+if len(sys.argv) > 1:
+    CAL_ID = sys.argv[1]
+else:
+    with open("calendar_id", "r", encoding="UTF-8") as f:
+        CAL_ID = str.strip(f.read())
+ 
+print(CAL_ID)
+print(len(CAL_ID)) 
 creds = load_credentials_from_file(PWD + '/credentials.json', SCOPES)[0]
 service = build('calendar', 'v3', credentials=creds)
 
@@ -32,5 +39,5 @@ events = events_result.get('items', [])
 if not events:
     print('ゴミの収集はありません。')
 else:
-     print(events[0]['summary'] + 'の日です。')
+    print(events[0]['summary'] + 'の日です。')
 
