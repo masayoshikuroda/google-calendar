@@ -11,11 +11,9 @@ PWD = os.path.dirname(__file__)
 if len(sys.argv) > 1:
     CAL_ID = sys.argv[1]
 else:
-    with open("calendar_id", "r", encoding="UTF-8") as f:
+    with open(PWD + '/calendar_id', 'r', encoding='UTF-8') as f:
         CAL_ID = str.strip(f.read())
  
-print(CAL_ID)
-print(len(CAL_ID)) 
 creds = load_credentials_from_file(PWD + '/credentials.json', SCOPES)[0]
 service = build('calendar', 'v3', credentials=creds)
 
