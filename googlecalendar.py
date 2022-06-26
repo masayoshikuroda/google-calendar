@@ -6,8 +6,9 @@ from googleapiclient.discovery import build
 from google.auth import load_credentials_from_file
 
 class GoogleCalendar:
+  BASE_PATH = os.path.dirname(os.path.abspath(__file__))
   scopes = ['https://www.googleapis.com/auth/calendar.readonly']
-  credentials = load_credentials_from_file('credentials.json', scopes)[0]
+  credentials = load_credentials_from_file(os.path.join(BASE_PATH, 'credentials.json'), scopes)[0]
   service = build('calendar', 'v3', credentials=credentials)
 
   def __init__(self, calendarId):
